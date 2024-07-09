@@ -41,6 +41,7 @@ public class EntitySetSelectExpandTests
     [DataRow("/odata/Countries?$expand=*/$ref", "countries_expand(Regions-ref,Cities-ref)", DisplayName = "expand(all-ref)")]
     [DataRow("/odata/Countries?$select=Id&$expand=Regions", "countries_select(Id)expand(Regions)", DisplayName = "select-expand")]
     [DataRow("/odata/Countries?$select=Id&$expand=Regions($select=Name)", "countries_select(Id)expand(Regions(select=Name))", DisplayName = "select-expand(nestedselect)")]
+    [DataRow("/odata/Cities?$compute=Population div Density as Area&$select=Id,Name,Area","cities_select(computeArea)", DisplayName = "select(with compute)")]
     public Task SelectExpandAsync(string requestUrl, string schemaName)
         => TestServer.GetAndValidateODataRequestAsync(requestUrl, schemaName);
 
